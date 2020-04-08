@@ -1,0 +1,13 @@
+C:\Users\AP\Documents\Shecan\bin\Debug\Shecan.exe.config
+C:\Users\AP\Documents\Shecan\bin\Debug\Shecan.exe
+C:\Users\AP\Documents\Shecan\bin\Debug\Shecan.pdb
+C:\Users\AP\Documents\Shecan\obj\Debug\Shecan.csprojAssemblyReference.cache
+C:\Users\AP\Documents\Shecan\obj\Debug\Shecan.Properties.Resources.resources
+C:\Users\AP\Documents\Shecan\obj\Debug\Shecan.csproj.GenerateResource.cache
+C:\Users\AP\Documents\Shecan\obj\Debug\Shecan.csproj.CoreCompileInputs.cache
+C:\Users\AP\Documents\Shecan\obj\Debug\Shecan.exe
+C:\Users\AP\Documents\Shecan\obj\Debug\Shecan.pdb
+C:\Users\AP\Documents\Shecan\obj\Debug\Shecan.Form1.resources
+C:\Users\AP\Documents\Shecan\bin\Debug\DNS.dll
+C:\Users\AP\Documents\Shecan\bin\Debug\System.Reflection.TypeExtensions.dll
+C:\Users\AP\Documents\Shecan\obj\Debug\Shecan.csproj.CopyComplete
