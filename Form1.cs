@@ -18,6 +18,7 @@ namespace Shecan
         public Form1()
         {
             InitializeComponent();
+            MinimizeToTray();
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -44,12 +45,12 @@ namespace Shecan
                 if (FormWindowState.Minimized == this.WindowState)
                 {
                     notifyIcon1.Visible = true;
-                    notifyIcon1.ShowBalloonTip(1000);
+                    notifyIcon1.ShowBalloonTip(500);
                     this.Hide();
                 }
                 else if (FormWindowState.Normal == this.WindowState)
                 {
-                    notifyIcon1.Visible = false;
+                    notifyIcon1.Visible = true;
                 }
             }
             catch (Exception ex)
@@ -77,41 +78,60 @@ namespace Shecan
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            var dnsS = DNSUtil.GetDnsAdresses();
-            var dnsStrings = dnsS.Select(x => x.ToString().ToString()).ToList();
-            if (dnsStrings.Contains(DNS1) || dnsStrings.Contains(DNS2))
+            try
             {
-                btn_connect_disconnect.Text = "Disconnect";
+                var dnsS = DNSUtil.GetDnsAdresses();
+                var dnsStrings = dnsS.Select(x => x.ToString().ToString()).ToList();
+                if (dnsStrings.Contains(DNS1) || dnsStrings.Contains(DNS2))
+                {
+                    btn_connect_disconnect.Text = "Disconnect";
+                }
+                else
+                {
+                    btn_connect_disconnect.Text = "Connect";
+                }
             }
-            else
+            catch
             {
-                btn_connect_disconnect.Text = "Connect";
+                MessageBox.Show("No Internet Connection!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btn_connect_disconnect_Click(object sender, EventArgs e)
         {
-            Button btn = sender as Button;
-            string NIC = DNSUtil.GetActiveEthernetOrWifiNetworkInterface().Name;
-            switch (btn.Text)
+            try
             {
-                case "Connect":
-                    DNSUtil.SetDNS(NIC, DNS1+","+DNS2);
-                    break;
-                case "Disconnect":
-                    DNSUtil.SetDNS(NIC, null);
-                    break;
+                Button btn = sender as Button;
+                string NIC = DNSUtil.GetActiveEthernetOrWifiNetworkInterface().Name;
+                switch (btn.Text)
+                {
+                    case "Connect":
+                        DNSUtil.SetDNS(NIC, DNS1 + "," + DNS2);
+                        break;
+                    case "Disconnect":
+                        DNSUtil.SetDNS(NIC, null);
+                        break;
+                }
+                var dnsS = DNSUtil.GetDnsAdresses();
+                var dnsStrings = dnsS.Select(x => x.ToString().ToString()).ToList();
+                if (dnsStrings.Contains(DNS1) || dnsStrings.Contains(DNS2))
+                {
+                    btn_connect_disconnect.Text = "Disconnect";
+                }
+                else
+                {
+                    btn_connect_disconnect.Text = "Connect";
+                }
             }
-            var dnsS = DNSUtil.GetDnsAdresses();
-            var dnsStrings = dnsS.Select(x => x.ToString().ToString()).ToList();
-            if (dnsStrings.Contains(DNS1) || dnsStrings.Contains(DNS2))
+            catch
             {
-                btn_connect_disconnect.Text = "Disconnect";
+                MessageBox.Show("No Internet Connection!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else
-            {
-                btn_connect_disconnect.Text = "Connect";
-            }
+        }
+
+        private void NotifyIcon1_MouseDoubleClick_1(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }
